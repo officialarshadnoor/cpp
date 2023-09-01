@@ -118,23 +118,24 @@
 //	}
 //}
 
-
+// DSA Day 2: Printing Patterns
 
 // Printing the half pyramid by taking input from user
-//#include<iostream>
-//using namespace std;
-//int main(){
-//	cout<<"Enter value of n: \n";
-//	int n;
-//	cin>>n;
-//	for (int row=0;row<n-1;row++){
-//		for (int col=0;col<row+1;col++){
-//			cout<<"* ";
-//		}
-//		cout<<endl;
-//	}
-//}
+// #include<iostream>
+// using namespace std;
+// int main(){
+// 	cout<<"Enter value of n: \n";
+// 	int n;
+// 	cin>>n;
+// 	for (int row=0;row<n-1;row++){
+// 		for (int col=0;col<row+1;col++){
+// 			cout<<"* ";
+// 		}
+// 		cout<<endl;
+// 	}
+// }
 
+// DSA Day 2: Printing Patterns
 
 // Printing inverted half pyramid
 // #include<iostream>
@@ -243,30 +244,119 @@
 // 		cout<<endl;
 // 	}
 // }
-
+// DSA Day 2 : Printing patterns advanced levels
 
 // Printing full Hollow pyramid by getting n value from user
+// #include<iostream>
+// using namespace std;
+// int main(){
+// 	cout<<"Enter value for n: \n";
+// 	int n;
+// 	cin>>n;
+// 	for (int row=0;row<n;row++){
+// 		int k=0;
+// 		for (int col=0;col<((2*n)-1);col++){
+// 			if (col<n-row-1){
+// 				cout<<"  ";
+// 			} else if(k<2*row+1){
+// 				if(k==0 || k==2*row ||row == n-1)
+// 					cout<<"* ";
+// 				else
+// 					cout<<"  ";
+// 					k++;
+// 			} else {
+// 				cout<<"  ";
+// 			}
+// 		}
+// 		cout<<endl;
+// 	}
+// }
+
+// Printing full pyramid
+// #include<iostream>
+// using namespace std;
+// int main(){
+// 	int n;
+// 	cout<<"Enter value of n: ";
+// 	cin>>n;
+// 	for (int row=0;row<n; row++){
+// 		// space 
+// 		for (int col=0;col<n-row-1;col++){
+// 			cout<<" ";
+// 		}
+
+// 		// stars
+// 		for (int col=0;col<row+1;col++){
+// 			cout<<"* ";
+// 		}
+// 		cout<<endl;
+// 	}
+// }
+
+
+
+// Printing inverted pyramid
+
+// #include<iostream>
+// using namespace std;
+// int main(){
+// 	int n;
+// 	cout<<"Enter a value for n: ";
+// 	cin>>n;
+// 	for (int row=0;row<n;row++){
+// 		// space
+// 		for (int col=0;col<row;col++){
+// 			cout<<" ";
+// 		}
+// 		// for star
+// 		for (int col=0;col<n-row;col++ ){
+// 			cout<<"* ";
+// 		}
+// 		cout<<endl;
+// 	}
+// }
+
+
+// Printing solid diamond
+// #include<iostream>
+// using namespace std;
+// int main(){
+// 	cout<<"Enter value for n: ";
+// 	int n;
+// 	cin>>n;
+// 	for (int row=0;row<n;row++){
+// 		// space
+// 		for (int col=0;col<n-row-1;col++){
+// 			cout<<" ";
+// 		}
+// 		for (int col=0;col<row;col++){
+// 			cout<<"* ";
+// 		}
+// 		cout<<endl;
+// 	}
+// 	// for other half portion
+// 	for (int row=0;row<n;row++){
+// 		// space
+// 		for (int col=0;col<row;col++){
+// 			cout<<" ";
+// 		}
+// 		// for star
+// 		for (int col=0;col<n-row-1;col++ ){
+// 			cout<<"* ";
+// 		}
+// 		cout<<endl;
+// 	}
+// }
+
+
+// inverted half pyramid printing 
 #include<iostream>
 using namespace std;
 int main(){
-	cout<<"Enter value for n: \n";
 	int n;
+	cout<<"Enter value for n: ";
 	cin>>n;
 	for (int row=0;row<n;row++){
-		int k=0;
-		for (int col=0;col<((2*n)-1);col++){
-			if (col<n-row-1){
-				cout<<"  ";
-			} else if(k<2*row+1){
-				if(k==0 || k==2*row ||row == n-1)
-					cout<<"* ";
-				else
-					cout<<"  ";
-					k++;
-			} else {
-				cout<<"  ";
-			}
-		}
-		cout<<endl;
+		
 	}
 }
