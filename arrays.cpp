@@ -164,33 +164,33 @@
 // Note: Best practice when we find any max number in array we start with INT_MIN
 // And same as start with INT_MAX when we search for max num in array
 
-// #include <iostream>
-// #include <limits.h>
-// using namespace std;
-// int main()
-// {
-//     int max = INT_MIN;
+#include <iostream>
+#include <limits.h>
+using namespace std;
+int main()
+{
+    int max = INT_MIN;
 
-//     cout << "How many numbers you want to enter? \n";
-//     int lim;
-//     cin >> lim;
-//     cout << "Enter the numbers one by one: \n";
-//     int arr[lim];
-//     for (int i = 0; i < lim; i++)
-//     {
-//         cin >> arr[i];
-//     }
-//     // for finding the max number
-//     for (int i = 0; i < lim; i++)
-//     {
-//         if (arr[i] > max)
-//         {
-//             max = arr[i];
-//         }
-//     }
-//     cout << "Maximum number is " << max << endl;
+    cout << "How many numbers you want to enter? \n";
+    int lim;
+    cin >> lim;
+    cout << "Enter the numbers one by one: \n";
+    int arr[lim];
+    for (int i = 0; i < lim; i++)
+    {
+        cin >> arr[i];
+    }
+    // for finding the max number
+    for (int i = 0; i < lim; i++)
+    {
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+    }
+    cout << "Maximum number is " << max << endl;
 
-//     return 0;
-// }
+    return 0;
+}
 
 // ('^')
