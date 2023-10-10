@@ -307,6 +307,7 @@
 // }
 
 // Character is available in the array or not
+<<<<<<< HEAD
 // #include <iostream>
 // using namespace std;
 
@@ -370,10 +371,31 @@ vector<vector<int>> findCombinations(vector<int> &candidates, int target)
     vector<int> current;
     combinationSum(candidates, target, 0, current, result);
     return result;
+=======
+#include <iostream>
+using namespace std;
+
+bool checkKey(string str, int i, int n, char key)
+{
+    // base case
+    if (i >= n)
+    {
+        return false;
+    }
+    // we'll solve one case
+    if (str[i] == key)
+    {
+        return true;
+    }
+
+    // baki sab recursion sambhal lega
+    return checkKey(str, i + 1, n, key);
+>>>>>>> ecc0be87317dca7f9e67660e0189bd98d3bcf806
 }
 
 int main()
 {
+<<<<<<< HEAD
     int n, target;
     cout << "Enter the number of elements: ";
     cin >> n;
@@ -396,5 +418,16 @@ int main()
         }
         cout << "]" << endl;
     }
+=======
+    string str = "ArshadNoor";
+    int n = str.length();
+
+    char key = 'r';
+
+    int i = 0;
+    bool ans = checkKey(str, i, n, key);
+    cout << "Answer is: " << ans << endl;
+
+>>>>>>> ecc0be87317dca7f9e67660e0189bd98d3bcf806
     return 0;
 }

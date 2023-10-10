@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // pointers
+=======
+// pointers -- We use pointers to allocate memory dynamically
+>>>>>>> ecc0be87317dca7f9e67660e0189bd98d3bcf806
 
 // Declare a Pointer and Assign a Value
 
@@ -192,4 +196,8 @@ int main() {
     display(head);
 
     return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ecc0be87317dca7f9e67660e0189bd98d3bcf806

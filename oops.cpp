@@ -341,36 +341,280 @@
  * Polymorphism : It means one thing exiting in multiple forms
  */
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-class Maths
+// class Maths
+// {
+// public:
+//     int sum(int a, int b)
+//     {
+//         return a + b;
+//     }
+
+//     int sum(int a, int b, int c)
+//     {
+//         return a + b + c;
+//     }
+
+//     int sum(int a, float b)
+//     {
+//         return a + b;
+//     }
+
+//     // here sum function is existing in multiple forms (3 forms), so it is called polymorphism
+//     ;
+// };
+
+// int main()
+// {
+//     Maths obj;
+
+//     cout << "Functions with two parameters " << obj.sum(2, 5) << endl;
+//     cout << "Function with three parameters " << obj.sum(2, 4, 6) << endl;
+//     cout << "Function with float value " << obj.sum(12, 4.12f) << endl;
+// }
+
+// Let's Dive deep into polymorphism
+
+// Overriding Function in polymorphism
+
+// #include <iostream>
+// using namespace std;
+
+// class Animal
+// {
+// public:
+//     void speak()
+//     {
+//         cout << "Speaking " << endl;
+//     }
+// };
+
+// class Dog : public Animal
+// {
+// public:
+//     // override
+//     void speak()
+//     {
+//         cout << "Speaking 2" << endl;
+//     }
+// };
+
+// int main()
+// {
+//     Dog obj;
+//     obj.speak();
+
+//     return 0;
+// }
+
+// Memory allocation
+
+// #include <iostream>
+// using namespace std;
+
+// class Animal
+// {
+// public:
+//     void speak()
+//     {
+//         cout << "Speaking ..." << endl;
+//     }
+// };
+
+// class Dog : public Animal
+// {
+// public:
+//     void speak()
+//     {
+//         cout << "Barking..." << endl;
+//     }
+// };
+
+// int main()
+// {
+//     Animal *a = new Dog();
+
+//     return 0;
+// }
+
+/*  ---------- NEXT TOPIC : Const Keyword ------------
+ * -> It is immutable
+ * -> It if once we assign value to const keyword we can't reassign them
+ *
+ */
+
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     const int x = 5; // x is constant
+//     // we can't re-assign a value
+//     // works as just like a promise
+//     // x = 10; // it will give error
+
+//     // 2. Const with pointers
+//     // int *a = new int;
+//     // *a = 2;
+//     // cout << *a << endl;
+//     // int b = 5;
+//     // a = &b;
+//     // cout << *a << endl;
+
+//     // CONST Pointer, not Non-Const Data
+
+//     return 0;
+// }
+
+// #include <iostream>
+// using namespace std;
+// int x = 2; // GLOBAL Variable
+
+// int main()
+// {
+//     ::x = 4;
+//     int x = 20;
+
+//     cout << x << endl;
+//     cout << ::x << endl;
+
+//     {
+//         int x = 50;
+//         cout << x << endl;
+//         cout << ::x << endl;
+//     }
+
+//     return 0;
+// }
+
+// Static in class
+// #include <iostream>
+// using namespace std;
+
+// class abc
+// {
+//     int x, y;
+
+//     void print() const
+//     {
+//         cout << this->x << " " << this->y << endl;
+//     }
+// };
+
+// int main()
+// {
+//     abc ob1 = {1, 2};
+//     abc obj2 = {4, 5};
+//     ob1.print();
+//     obj2.print();
+
+//     return 0;
+// }
+
+// Static data members
+
+// #include <iostream>
+// using namespace std;
+
+// class abc
+// {
+// public:
+//     static int x, y;
+
+//     void print() const
+//     {
+//         cout << x << " " << y << endl;
+//     }
+// };
+
+// int abc::x;
+// int abc::y;
+
+// int main()
+// {
+//     abc ob1;
+// }
+
+// Private Constructor
+class Singleton
 {
 public:
-    int sum(int a, int b)
+    static Singleton &getInstance()
     {
-        return a + b;
+        static Singleton instance;
+        return instance;
     }
 
-    int sum(int a, int b, int c)
-    {
-        return a + b + c;
-    }
-
-    int sum(int a, float b)
-    {
-        return a + b;
-    }
-
-    // here sum function is existing in multiple forms (3 forms), so it is called polymorphism
-    ;
+private:
+    Singleton() {}
 };
 
 int main()
 {
-    Maths obj;
+    // This won't work, as the constructor is private
+    // Singleton s;
 
-    cout << "Functions with two parameters " << obj.sum(2, 5) << endl;
-    cout << "Function with three parameters " << obj.sum(2, 4, 6) << endl;
-    cout << "Function with float value " << obj.sum(12, 4.12f) << endl;
+    Singleton &instance = Singleton::getInstance();
+    // Use the Singleton instance
+    return 0;
+}
+
+// Virtual Constructor
+class Base
+{
+public:
+    virtual void print()
+    {
+        std::cout << "Base class" << std::endl;
+    }
+};
+
+class Derived : public Base
+{
+public:
+    static Base *create()
+    {
+        return new Derived();
+    }
+
+    void print() override
+    {
+        std::cout << "Derived class" << std::endl;
+    }
+};
+
+int main()
+{
+    Base *obj = Derived::create();
+    obj->print(); // Calls the overridden method in Derived class
+    delete obj;   // Don't forget to delete the object to avoid memory leaks
+    return 0;
+}
+
+// Virtual Destructor
+class Base
+{
+public:
+    virtual ~Base()
+    {
+        std::cout << "Base destructor" << std::endl;
+    }
+};
+
+class Derived : public Base
+{
+public:
+    ~Derived() override
+    {
+        std::cout << "Derived destructor" << std::endl;
+    }
+};
+
+int main()
+{
+    Base *obj = new Derived();
+    delete obj; // Calls the Derived destructor through the virtual destructor
+    return 0;
 }
