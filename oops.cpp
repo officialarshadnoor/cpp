@@ -538,83 +538,83 @@
 // }
 
 // Private Constructor
-class Singleton
-{
-public:
-    static Singleton &getInstance()
-    {
-        static Singleton instance;
-        return instance;
-    }
+// class Singleton
+// {
+// public:
+//     static Singleton &getInstance()
+//     {
+//         static Singleton instance;
+//         return instance;
+//     }
 
-private:
-    Singleton() {}
-};
+// private:
+//     Singleton() {}
+// };
 
-int main()
-{
-    // This won't work, as the constructor is private
-    // Singleton s;
+// int main()
+// {
+//     // This won't work, as the constructor is private
+//     // Singleton s;
 
-    Singleton &instance = Singleton::getInstance();
-    // Use the Singleton instance
-    return 0;
-}
+//     Singleton &instance = Singleton::getInstance();
+//     // Use the Singleton instance
+//     return 0;
+// }
 
-// Virtual Constructor
-class Base
-{
-public:
-    virtual void print()
-    {
-        std::cout << "Base class" << std::endl;
-    }
-};
+// // Virtual Constructor
+// class Base
+// {
+// public:
+//     virtual void print()
+//     {
+//         std::cout << "Base class" << std::endl;
+//     }
+// };
 
-class Derived : public Base
-{
-public:
-    static Base *create()
-    {
-        return new Derived();
-    }
+// class Derived : public Base
+// {
+// public:
+//     static Base *create()
+//     {
+//         return new Derived();
+//     }
 
-    void print() override
-    {
-        std::cout << "Derived class" << std::endl;
-    }
-};
+//     void print() override
+//     {
+//         std::cout << "Derived class" << std::endl;
+//     }
+// };
 
-int main()
-{
-    Base *obj = Derived::create();
-    obj->print(); // Calls the overridden method in Derived class
-    delete obj;   // Don't forget to delete the object to avoid memory leaks
-    return 0;
-}
+// int main()
+// {
+//     Base *obj = Derived::create();
+//     obj->print(); // Calls the overridden method in Derived class
+//     delete obj;   // Don't forget to delete the object to avoid memory leaks
+//     return 0;
+// }
 
-// Virtual Destructor
-class Base
-{
-public:
-    virtual ~Base()
-    {
-        std::cout << "Base destructor" << std::endl;
-    }
-};
+// // Virtual Destructor
+// class Base
+// {
+// public:
+//     virtual ~Base()
+//     {
+//         std::cout << "Base destructor" << std::endl;
+//     }
+// };
 
-class Derived : public Base
-{
-public:
-    ~Derived() override
-    {
-        std::cout << "Derived destructor" << std::endl;
-    }
-};
+// class Derived : public Base
+// {
+// public:
+//     ~Derived() override
+//     {
+//         std::cout << "Derived destructor" << std::endl;
+//     }
+// };
 
-int main()
-{
-    Base *obj = new Derived();
-    delete obj; // Calls the Derived destructor through the virtual destructor
-    return 0;
-}
+// int main()
+// {
+//     Base *obj = new Derived();
+//     delete obj; // Calls the Derived destructor through the virtual destructor
+//     return 0;
+// }
