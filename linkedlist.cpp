@@ -246,6 +246,213 @@
 // Reverse Linked list in a group of k
 // we'll solve this problem using recursion method
 
+// #include <iostream>
+// using namespace std;
+
+// class Node
+// {
+// public:
+//     int data;
+//     Node *next;
+
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->next = NULL;
+//     }
+// };
+
+// void print(Node *head)
+// {
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         cout << temp->data << " ";
+//         temp = temp->next;
+//     }
+//     cout << endl;
+// }
+
+// int getLength(Node *head)
+// {
+//     int len = 0;
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         temp = temp->next;
+//         len++;
+//     }
+//     return len;
+// }
+
+// Node *reverseKNodes(Node *&head, int k)
+// {
+//     if (head == NULL)
+//     {
+//         cout << "Linked List is empty!!" << endl;
+//         return NULL;
+//     }
+//     int len = getLength(head);
+//     if (k > len)
+//     {
+//         cout << "Enter valid value for k" << endl;
+//         return head;
+//     }
+
+//     // if below this code executes, it means, Number of LL is >= k
+//     // Step A: reverse first k nodes of LL
+//     Node *prev = NULL;
+//     Node *curr = head;
+//     Node *forward = head->next;
+
+//     int count = 0;
+
+//     while (count < k)
+//     {
+//         forward = curr->next;
+//         curr->next = prev;
+//         prev = curr;
+//         curr = forward;
+//         count++;
+//     }
+
+//     // Step B: Recursive call
+//     if (forward != NULL)
+//     {
+//         // it means we still have nodes to reverse
+//         head->next = reverseKNodes(forward, k);
+//     }
+
+//     // Step c: return head of the modified LL
+//     return prev;
+// }
+
+// int main()
+// {
+//     Node *head = new Node(10);
+//     Node *second = new Node(20);
+//     Node *third = new Node(30);
+//     Node *fourth = new Node(40);
+//     Node *fifth = new Node(50);
+//     Node *sixth = new Node(60);
+
+//     head->next = second;
+//     second->next = third;
+//     third->next = fourth;
+//     fourth->next = fifth;
+//     fifth->next = sixth;
+//     sixth->next = NULL;
+
+//     print(head);
+
+//     head = reverseKNodes(head, 3);
+//     print(head);
+
+//     return 0;
+// }
+
+/* ---------- DAY 4 ----------------- */
+
+/* Detect & Delete loop
+ ** Basic steps:
+ -> Check loop is present in LL or not
+ -> Starting point of loop
+ -> Remove loop
+
+ */
+
+// #include <iostream>
+// using namespace std;
+
+// class Node
+// {
+// public:
+//     int data;
+//     Node *next;
+
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->next = NULL;
+//     }
+// };
+
+// void print(Node *head)
+// {
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         cout << temp->data << " ";
+//         temp = temp->next;
+//     }
+//     cout << endl;
+// }
+
+// bool checkForLoop(Node *&head)
+// {
+//     if (head == NULL)
+//     {
+//         cout << "LL is empty" << endl;
+//         return false;
+//     }
+
+//     Node *slow = head;
+//     Node *fast = head;
+
+//     while (fast != NULL)
+//     {
+//         fast = fast->next;
+//         if (fast != NULL)
+//         {
+//             fast = fast->next;
+//             slow = slow->next;
+//         }
+
+//         if (slow == fast)
+//         {
+//             // loop present
+//             return true;
+//         }
+//     }
+//     // If fast becomes NULL
+//     return false;
+// }
+
+// int main()
+// {
+//     Node *head = new Node(10);
+//     Node *second = new Node(20);
+//     Node *third = new Node(30);
+//     Node *fourth = new Node(40);
+//     Node *fifth = new Node(50);
+//     Node *sixth = new Node(60);
+//     Node *seventh = new Node(70);
+//     Node *eighth = new Node(80);
+//     Node *ninth = new Node(90);
+
+//     head->next = second;
+//     second->next = third;
+//     third->next = fourth;
+//     fourth->next = fifth;
+//     fifth->next = sixth;
+//     sixth->next = seventh;
+//     seventh->next = eighth;
+//     eighth->next = ninth;
+//     ninth->next = fifth;
+
+//     cout << "Loop is present or not " << checkForLoop(head);
+
+//     return 0;
+// }
+
+// Check Linked List is pelindrome or not
+/* Approach
+-> Find middle
+-> Reverse LL after middle node
+-> start comparing both sides
+
+*/
+
 #include <iostream>
 using namespace std;
 
@@ -268,73 +475,86 @@ void print(Node *head)
     while (temp != NULL)
     {
         cout << temp->data << " ";
-        temp = temp->next;
     }
     cout << endl;
 }
 
-int getLength(Node *head)
+Node *reverse(Node *head)
 {
-    int len = 0;
-    Node *temp = head;
-    while (temp != NULL)
-    {
-        temp = temp->next;
-        len++;
-    }
-    return len;
-}
-
-Node *reverseKNodes(Node *&head, int k)
-{
-    if (head == NULL)
-    {
-        cout << "Linked List is empty!!" << endl;
-        return NULL;
-    }
-    int len = getLength(head);
-    if (k > len)
-    {
-        cout << "Enter valid value for k" << endl;
-        return head;
-    }
-
-    // if below this code executes, it means, Number of LL is >= k
-    // Step A: reverse first k nodes of LL
     Node *prev = NULL;
     Node *curr = head;
-    Node *forward = head->next;
-
-    int count = 0;
-
-    while (count < k)
+    Node *next = curr->next;
+    while (curr != NULL)
     {
-        forward = curr->next;
+        next = curr->next;
         curr->next = prev;
         prev = curr;
-        curr = forward;
-        count++;
+        curr = next;
     }
-
-    // Step B: Recursive call
-    if (forward != NULL)
-    {
-        // it means we still have nodes to reverse
-        head->next = reverseKNodes(forward, k);
-    }
-
-    // Step c: return head of the modified LL
     return prev;
+}
+
+bool checkPelindrome(Node *&head)
+{
+    if (head = NULL)
+    {
+        cout << "Linked list is empty" << endl;
+        return true;
+    }
+    if (head->next == NULL)
+    {
+        // only 1 node
+        return true;
+    }
+
+    // >1 node in LL
+
+    // Step A: Find middle node
+    Node *slow = head;
+    Node *fast = head;
+    while (fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+    }
+    // slow point is pinting to middle node
+    // Step B: reverse LL after middle mode/slow node
+    Node *reverseLLKaHead = reverse(slow->next);
+
+    // join the reversed LL into the left part
+    slow->next = reverseLLKaHead;
+
+    // Step c: Start comparision
+    Node *temp1 = head;
+    Node *temp2 = reverseLLKaHead;
+    while (temp2 != NULL)
+    {
+        if (temp1->data != temp2->data)
+        {
+            return false;
+        }
+        else
+        {
+            // if data is equal then move forward
+            temp1 = temp1->next;
+            temp2 = temp2->next;
+        }
+        return true;
+    }
 }
 
 int main()
 {
     Node *head = new Node(10);
     Node *second = new Node(20);
-    Node *third = new Node(30);
-    Node *fourth = new Node(40);
-    Node *fifth = new Node(50);
-    Node *sixth = new Node(60);
+    Node *third = new Node(300);
+    Node *fourth = new Node(300);
+    Node *fifth = new Node(20);
+    Node *sixth = new Node(10);
 
     head->next = second;
     second->next = third;
@@ -343,12 +563,16 @@ int main()
     fifth->next = sixth;
     sixth->next = NULL;
 
-    print(head);
+    bool isPalindrome = checkPelindrome(head);
 
-    head = reverseKNodes(head, 3);
-    print(head);
+    if (isPalindrome)
+    {
+        cout << "Linked list is a valid palindrome!!" << endl;
+    }
+    else
+    {
+        cout << "Linked list is not a valid palidrome"
+    }
 
     return 0;
 }
-
-// Happy programming :)
