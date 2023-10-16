@@ -453,6 +453,324 @@
 
 */
 
+// #include <iostream>
+// using namespace std;
+
+// class Node
+// {
+// public:
+//     int data;
+//     Node *next;
+
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->next = NULL;
+//     }
+// };
+
+// void print(Node *head)
+// {
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         cout << temp->data << " ";
+//     }
+//     cout << endl;
+// }
+
+// Node *reverse(Node *head)
+// {
+//     Node *prev = NULL;
+//     Node *curr = head;
+//     Node *next = curr->next;
+//     while (curr != NULL)
+//     {
+//         next = curr->next;
+//         curr->next = prev;
+//         prev = curr;
+//         curr = next;
+//     }
+//     return prev;
+// }
+
+// bool checkPelindrome(Node *&head)
+// {
+//     if (head = NULL)
+//     {
+//         cout << "Linked list is empty" << endl;
+//         return true;
+//     }
+//     if (head->next == NULL)
+//     {
+//         // only 1 node
+//         return true;
+//     }
+
+//     // >1 node in LL
+
+//     // Step A: Find middle node
+//     Node *slow = head;
+//     Node *fast = head;
+//     while (fast != NULL)
+//     {
+//         fast = fast->next;
+//         if (fast != NULL)
+//         {
+//             fast = fast->next;
+//             slow = slow->next;
+//         }
+//     }
+//     // slow point is pinting to middle node
+//     // Step B: reverse LL after middle mode/slow node
+//     Node *reverseLLKaHead = reverse(slow->next);
+
+//     // join the reversed LL into the left part
+//     slow->next = reverseLLKaHead;
+
+//     // Step c: Start comparision
+//     Node *temp1 = head;
+//     Node *temp2 = reverseLLKaHead;
+//     while (temp2 != NULL)
+//     {
+//         if (temp1->data != temp2->data)
+//         {
+//             return false;
+//         }
+//         else
+//         {
+//             // if data is equal then move forward
+//             temp1 = temp1->next;
+//             temp2 = temp2->next;
+//         }
+//         return true;
+//     }
+// }
+
+// int main()
+// {
+//     Node *head = new Node(10);
+//     Node *second = new Node(20);
+//     Node *third = new Node(300);
+//     Node *fourth = new Node(300);
+//     Node *fifth = new Node(20);
+//     Node *sixth = new Node(10);
+
+//     head->next = second;
+//     second->next = third;
+//     third->next = fourth;
+//     fourth->next = fifth;
+//     fifth->next = sixth;
+//     sixth->next = NULL;
+
+//     bool isPalindrome = checkPelindrome(head);
+
+//     if (isPalindrome)
+//     {
+//         cout << "Linked list is a valid palindrome!!" << endl;
+//     }
+//     else
+//     {
+//         cout << "Linked list is not a valid palidrome"
+//     }
+
+//     return 0;
+// }
+
+// ----------- Day 5  -
+
+// #include <iostream>
+// using namespace std;
+
+// class Node
+// {
+// public:
+//     int data;
+//     Node *next;
+
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->next = next;
+//     }
+// };
+
+// void print(Node *head)
+// {
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         cout << temp->data << " ";
+//         temp = temp->next;
+//     }
+//     cout << endl;
+// }
+
+// void removeDuplicates(Node *&head)
+// {
+//     if (head == NULL)
+//     {
+//         cout << "LL is empty" << endl;
+//         return;
+//     }
+//     if (head->next == NULL)
+//     {
+//         cout << "Single node in LL" << endl;
+//         return;
+//     }
+
+//     // >1 node in LL
+//     Node *curr = head;
+
+//     while (curr != NULL)
+//     {
+//         if ((curr->next != NULL) && (curr->data == curr->next->data))
+//         {
+//             // equal wala case
+//             Node *temp = curr->next;
+//             curr->next = curr->next->next;
+
+//             // delete node
+//             temp->next = NULL;
+//             delete temp;
+//         }
+//         else
+//         {
+//             // not equal wala case
+//             curr = curr->next;
+//         }
+//     }
+// }
+
+// int main()
+// {
+//     Node *head = new Node(1);
+//     Node *second = new Node(2);
+//     Node *third = new Node(2);
+//     Node *fourth = new Node(3);
+//     Node *fifth = new Node(4);
+
+//     head->next = second;
+//     second->next = third;
+//     third->next = fourth;
+//     fourth->next = fifth;
+//     fifth->next = NULL;
+
+//     print(head);
+
+//     removeDuplicates(head);
+
+//     cout << "Output LL:" << endl;
+//     print(head);
+
+//     return 0;
+// }
+
+// sort 0s, 1s, 2s
+
+// #include <iostream>
+// using namespace std;
+
+// class Node
+// {
+// public:
+//     int data;
+//     Node *next;
+
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->next = next;
+//     }
+// };
+
+// void print(Node *head)
+// {
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         cout << temp->data << " ";
+//         temp = temp->next;
+//     }
+// }
+
+// void sortZeroOneTwo(Node *&head)
+// {
+//     int zero = 0;
+//     int one = 0;
+//     int two = 0;
+
+//     Node *temp = head;
+
+//     // step: find count of zeros, ones, and twos
+//     while (temp != NULL)
+//     {
+//         if (temp->data == 0)
+//         {
+//             zero++;
+//         }
+//         else if (temp->data == 1)
+//         {
+//             one++;
+//         }
+//         else if (temp->data == 2)
+//         {
+//             two++;
+//         }
+//         temp = temp->next;
+//     }
+
+//     // step 2: fill 0, 1 and 2s in original ll
+//     temp = head;
+//     while (temp != NULL)
+//     {
+//         // fill zeros
+//         while (zero--)
+//         {
+//             temp->data = 0;
+//             temp = temp->next;
+//         }
+//         // fill ones
+//         while (one--)
+//         {
+//             temp->data = 1;
+//             temp = temp->next;
+//         }
+//         // fill 2s
+//         while (two--)
+//         {
+//             temp->data = 2;
+//             temp = temp->next;
+//         }
+//     }
+// }
+
+// int main()
+// {
+//     Node *head = new Node(1);
+//     Node *second = new Node(1);
+//     Node *third = new Node(2);
+//     Node *fourth = new Node(0);
+//     Node *fifth = new Node(2);
+//     Node *sixth = new Node(2);
+
+//     head->next = second;
+//     second->next = third;
+//     third->next = fourth;
+//     fourth->next = fifth;
+//     fifth->next = sixth;
+//     sixth->next = NULL;
+
+//     cout << "Before Sorting" << endl;
+//     print(head);
+
+//     cout << "\nSorted 0s, 1s, and 2s in LL" << endl;
+//     sortZeroOneTwo(head);
+//     print(head);
+
+//     return 0;
+// }
+
 #include <iostream>
 using namespace std;
 
@@ -465,7 +783,7 @@ public:
     Node(int data)
     {
         this->data = data;
-        this->next = NULL;
+        this->next = next;
     }
 };
 
@@ -475,86 +793,112 @@ void print(Node *head)
     while (temp != NULL)
     {
         cout << temp->data << " ";
+        temp = temp->next;
     }
     cout << endl;
 }
 
-Node *reverse(Node *head)
+Node *sort2(Node *&head)
 {
-    Node *prev = NULL;
+
+    // creating dummy nodes
+    Node *zeroHead = new Node(-1);
+    Node *zeroTail = zeroHead;
+
+    Node *oneHead = new Node(-1);
+    Node *oneTail = oneHead;
+
+    Node *twoHead = new Node(-1);
+    Node *twoTail = twoHead;
+
+    // traverse the original LL
+
     Node *curr = head;
-    Node *next = curr->next;
     while (curr != NULL)
     {
-        next = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = next;
-    }
-    return prev;
-}
 
-bool checkPelindrome(Node *&head)
-{
-    if (head = NULL)
-    {
-        cout << "Linked list is empty" << endl;
-        return true;
-    }
-    if (head->next == NULL)
-    {
-        // only 1 node
-        return true;
-    }
-
-    // >1 node in LL
-
-    // Step A: Find middle node
-    Node *slow = head;
-    Node *fast = head;
-    while (fast != NULL)
-    {
-        fast = fast->next;
-        if (fast != NULL)
+        if (curr->data == 0)
         {
-            fast = fast->next;
-            slow = slow->next;
+
+            // taking out the zero wala node
+            Node *temp = curr;
+            curr = curr->next;
+            temp->next = NULL;
+
+            // append the zero node in zeroHead LL
+            zeroTail->next = temp;
+            zeroTail = temp;
+        }
+        else if (curr->data == 1)
+        {
+            // taking out the one wala node
+            Node *temp = curr;
+            curr = curr->next;
+            temp->next = NULL;
+
+            // append the one node in zeroHead LL
+            oneTail->next = temp;
+            oneTail = temp;
+        }
+        else if (curr->data == 2)
+        {
+            // taking out the two wala node
+            Node *temp = curr;
+            curr = curr->next;
+            temp->next = NULL;
+
+            // append the two node in zeroHead LL
+            twoTail->next = temp;
+            twoTail = temp;
         }
     }
-    // slow point is pinting to middle node
-    // Step B: reverse LL after middle mode/slow node
-    Node *reverseLLKaHead = reverse(slow->next);
 
-    // join the reversed LL into the left part
-    slow->next = reverseLLKaHead;
+    // ab yaha par zeor, one aur two teeno ll ready hai
 
-    // Step c: Start comparision
-    Node *temp1 = head;
-    Node *temp2 = reverseLLKaHead;
-    while (temp2 != NULL)
+    // now, we have to join them
+    // then remove dummy nodes
+    // return head of modified linked list
+
+    // Modify one wali list
+    Node *temp = oneHead;
+    oneHead = oneHead->next;
+    temp->next = NULL;
+    delete temp;
+
+    // modify two wali list
+    Node *temp = twoHead;
+    twoHead = twoHead->next;
+    temp->next = NULL;
+    delete temp;
+
+    // join list
+    if (oneHead != NULL)
     {
-        if (temp1->data != temp2->data)
+        // one list is non empty
+        zeroTail->next = oneHead;
+        if (twoHead != NULL)
         {
-            return false;
+            oneTail->next = twoHead;
         }
         else
         {
-            // if data is equal then move forward
-            temp1 = temp1->next;
-            temp2 = temp2->next;
+            // one list is empty
+            if (twoHead != NULL)
+            {
+                zeroTail = twoHead;
+            }
         }
-        return true;
     }
 }
 
 int main()
 {
-    Node *head = new Node(10);
-    Node *second = new Node(20);
-    Node *third = new Node(300);
-    Node *fourth = new Node(300);
-    Node *fifth = new Node(20);
-    Node *sixth = new Node(10);
+    Node *head = new Node(2);
+    Node *second = new Node(2);
+    Node *third = new Node(1);
+    Node *fourth = new Node(1);
+    Node *fifth = new Node(0);
+    Node *sixth = new Node(0);
 
     head->next = second;
     second->next = third;
@@ -563,16 +907,12 @@ int main()
     fifth->next = sixth;
     sixth->next = NULL;
 
-    bool isPalindrome = checkPelindrome(head);
-
-    if (isPalindrome)
-    {
-        cout << "Linked list is a valid palindrome!!" << endl;
-    }
-    else
-    {
-        cout << "Linked list is not a valid palidrome"
-    }
+    cout << "Before sorting ";
+    print(head);
+    cout << endl;
+    cout << "After sorting: \n";
+    sort2(head);
+    print(head);
 
     return 0;
 }
