@@ -771,6 +771,153 @@
 //     return 0;
 // }
 
+// #include <iostream>
+// using namespace std;
+
+// class Node
+// {
+// public:
+//     int data;
+//     Node *next;
+
+//     Node(int data)
+//     {
+//         this->data = data;
+//         this->next = next;
+//     }
+// };
+
+// void print(Node *head)
+// {
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         cout << temp->data << " ";
+//         temp = temp->next;
+//     }
+//     cout << endl;
+// }
+
+// Node *sort2(Node *&head)
+// {
+
+//     // creating dummy nodes
+//     Node *zeroHead = new Node(-1);
+//     Node *zeroTail = zeroHead;
+
+//     Node *oneHead = new Node(-1);
+//     Node *oneTail = oneHead;
+
+//     Node *twoHead = new Node(-1);
+//     Node *twoTail = twoHead;
+
+//     // traverse the original LL
+
+//     Node *curr = head;
+//     while (curr != NULL)
+//     {
+
+//         if (curr->data == 0)
+//         {
+
+//             // taking out the zero wala node
+//             Node *temp = curr;
+//             curr = curr->next;
+//             temp->next = NULL;
+
+//             // append the zero node in zeroHead LL
+//             zeroTail->next = temp;
+//             zeroTail = temp;
+//         }
+//         else if (curr->data == 1)
+//         {
+//             // taking out the one wala node
+//             Node *temp = curr;
+//             curr = curr->next;
+//             temp->next = NULL;
+
+//             // append the one node in zeroHead LL
+//             oneTail->next = temp;
+//             oneTail = temp;
+//         }
+//         else if (curr->data == 2)
+//         {
+//             // taking out the two wala node
+//             Node *temp = curr;
+//             curr = curr->next;
+//             temp->next = NULL;
+
+//             // append the two node in zeroHead LL
+//             twoTail->next = temp;
+//             twoTail = temp;
+//         }
+//     }
+
+//     // ab yaha par zeor, one aur two teeno ll ready hai
+
+//     // now, we have to join them
+//     // then remove dummy nodes
+//     // return head of modified linked list
+
+//     // Modify one wali list
+//     Node *temp = oneHead;
+//     oneHead = oneHead->next;
+//     temp->next = NULL;
+//     delete temp;
+
+//     // modify two wali list
+//     Node *temp = twoHead;
+//     twoHead = twoHead->next;
+//     temp->next = NULL;
+//     delete temp;
+
+//     // join list
+//     if (oneHead != NULL)
+//     {
+//         // one list is non empty
+//         zeroTail->next = oneHead;
+//         if (twoHead != NULL)
+//         {
+//             oneTail->next = twoHead;
+//         }
+//         else
+//         {
+//             // one list is empty
+//             if (twoHead != NULL)
+//             {
+//                 zeroTail = twoHead;
+//             }
+//         }
+//     }
+// }
+
+// int main()
+// {
+//     Node *head = new Node(2);
+//     Node *second = new Node(2);
+//     Node *third = new Node(1);
+//     Node *fourth = new Node(1);
+//     Node *fifth = new Node(0);
+//     Node *sixth = new Node(0);
+
+//     head->next = second;
+//     second->next = third;
+//     third->next = fourth;
+//     fourth->next = fifth;
+//     fifth->next = sixth;
+//     sixth->next = NULL;
+
+//     cout << "Before sorting ";
+//     print(head);
+//     cout << endl;
+//     cout << "After sorting: \n";
+//     sort2(head);
+//     print(head);
+
+//     return 0;
+// }
+
+// Kth node from end
 #include <iostream>
 using namespace std;
 
@@ -798,121 +945,20 @@ void print(Node *head)
     cout << endl;
 }
 
-Node *sort2(Node *&head)
-{
-
-    // creating dummy nodes
-    Node *zeroHead = new Node(-1);
-    Node *zeroTail = zeroHead;
-
-    Node *oneHead = new Node(-1);
-    Node *oneTail = oneHead;
-
-    Node *twoHead = new Node(-1);
-    Node *twoTail = twoHead;
-
-    // traverse the original LL
-
-    Node *curr = head;
-    while (curr != NULL)
-    {
-
-        if (curr->data == 0)
-        {
-
-            // taking out the zero wala node
-            Node *temp = curr;
-            curr = curr->next;
-            temp->next = NULL;
-
-            // append the zero node in zeroHead LL
-            zeroTail->next = temp;
-            zeroTail = temp;
-        }
-        else if (curr->data == 1)
-        {
-            // taking out the one wala node
-            Node *temp = curr;
-            curr = curr->next;
-            temp->next = NULL;
-
-            // append the one node in zeroHead LL
-            oneTail->next = temp;
-            oneTail = temp;
-        }
-        else if (curr->data == 2)
-        {
-            // taking out the two wala node
-            Node *temp = curr;
-            curr = curr->next;
-            temp->next = NULL;
-
-            // append the two node in zeroHead LL
-            twoTail->next = temp;
-            twoTail = temp;
-        }
-    }
-
-    // ab yaha par zeor, one aur two teeno ll ready hai
-
-    // now, we have to join them
-    // then remove dummy nodes
-    // return head of modified linked list
-
-    // Modify one wali list
-    Node *temp = oneHead;
-    oneHead = oneHead->next;
-    temp->next = NULL;
-    delete temp;
-
-    // modify two wali list
-    Node *temp = twoHead;
-    twoHead = twoHead->next;
-    temp->next = NULL;
-    delete temp;
-
-    // join list
-    if (oneHead != NULL)
-    {
-        // one list is non empty
-        zeroTail->next = oneHead;
-        if (twoHead != NULL)
-        {
-            oneTail->next = twoHead;
-        }
-        else
-        {
-            // one list is empty
-            if (twoHead != NULL)
-            {
-                zeroTail = twoHead;
-            }
-        }
-    }
-}
-
 int main()
 {
-    Node *head = new Node(2);
-    Node *second = new Node(2);
-    Node *third = new Node(1);
-    Node *fourth = new Node(1);
-    Node *fifth = new Node(0);
-    Node *sixth = new Node(0);
+    Node *head = new Node(10);
+    Node *second = new Node(20);
+    Node *third = new Node(30);
+    Node *fourth = new Node(40);
+    Node *fifth = new Node(50);
+    Node *sixth = new Node(60);
 
     head->next = second;
     second->next = third;
     third->next = fourth;
     fourth->next = fifth;
     fifth->next = sixth;
-    sixth->next = NULL;
-
-    cout << "Before sorting ";
-    print(head);
-    cout << endl;
-    cout << "After sorting: \n";
-    sort2(head);
-    print(head);
 
     return 0;
 }
