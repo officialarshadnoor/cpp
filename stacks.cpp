@@ -314,60 +314,61 @@
 // we'll use recursion method for this
 // Hint : Insert at bottom and recursion
 
-// #include <iostream>
-// #include <stack>
-// using namespace std;
+#include <iostream>
+#include <stack>
+using namespace std;
 
-// void insertAtBottom(stack<int> &s)
-// {
-//     // base case
-//     if (s.empty())
-//     {
-//         s.push(target);
-//         return;
-//     }
-//     int topElement = s.top();
-//     s.pop();
-//     // rec cal
-//     insertAtBottom(s, target);
-//     // BT
-//     s.push(topElement);
-// }
+void insertAtBottom(stack<int> &s, int target)
+{
+    // base case
+    if (s.empty())
+    {
+        s.push(target);
+        return;
+    }
+    int topElement = s.top();
+    s.pop();
+    // recursively insert the target at the bottom
+    insertAtBottom(s, target);
+    // Bring the topElement back to the top
+    s.push(topElement);
+}
 
-// void reverseStack(stack<int> &s)
-// {
-//     // base case
-//     if (s.empty())
-//     {
-//         return;
-//     }
+void reverseStack(stack<int> &s)
+{
+    // base case
+    if (s.empty())
+    {
+        return;
+    }
 
-//     int target = s.top();
-//     s.pop();
+    int target = s.top();
+    s.pop();
 
-//     // reverse stack
-//     reverseStack(s);
-//     // insert at bottom target ko
-//     insertAtBottom(s, target);
-// }
+    // reverse the rest of the stack
+    reverseStack(s);
 
-// int main()
-// {
-//     stack<int> s;
-//     s.push(10);
-//     s.push(20);
-//     s.push(30);
-//     s.push(40);
-//     s.push(50);
+    // Insert the target at the bottom of the reversed stack
+    insertAtBottom(s, target);
+}
 
-//     reverseStack(s);
+int main()
+{
+    stack<int> s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    s.push(50);
 
-//     cout << "Printing" << endl;
-//     while (!s.empty())
-//     {
-//         cout << s.top() << " ";
-//         s.pop();
-//     }
-//     cout << endl;
-//     return 0;
-// }
+    reverseStack(s);
+
+    cout << "Printing" << endl;
+    while (!s.empty())
+    {
+        cout << s.top() << " ";
+        s.pop();
+    }
+    cout << endl;
+    return 0;
+}
