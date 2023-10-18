@@ -131,121 +131,243 @@
 
 //
 
-#include <iostream>
-#include <stack>
-using namespace std;
+// #include <iostream>
+// #include <stack>
+// using namespace std;
 
-class Stack
-{
-public:
-    int *arr;
-    int size;
-    int top1;
-    int top2;
+// class Stack
+// {
+// public:
+//     int *arr;
+//     int size;
+//     int top1;
+//     int top2;
 
-    Stack(int size)
-    {
-        arr = new int[size];
-        this->size = size;
-        top1 = -1;
-        top2 = size;
-    }
+//     Stack(int size)
+//     {
+//         arr = new int[size];
+//         this->size = size;
+//         top1 = -1;
+//         top2 = size;
+//     }
 
-    // functions
+//     // functions
 
-    void push1(int data)
-    {
-        if (top2 - top1 == 1)
-        {
-            // space is not available
-            cout << "Overflow" << endl;
-        }
-        else
-        {
-            // space available
-            top1++;
-            arr[top1] = data;
-        }
-    }
+//     void push1(int data)
+//     {
+//         if (top2 - top1 == 1)
+//         {
+//             // space is not available
+//             cout << "Overflow" << endl;
+//         }
+//         else
+//         {
+//             // space available
+//             top1++;
+//             arr[top1] = data;
+//         }
+//     }
 
-    void push2(int data)
-    {
-        if (top2 - top1 == 1)
-        {
-            // space is not available
-            cout << "Overflow" << endl;
-        }
-        else
-        {
-            top2--;
-            arr[top2] = data;
-        }
-    }
+//     void push2(int data)
+//     {
+//         if (top2 - top1 == 1)
+//         {
+//             // space is not available
+//             cout << "Overflow" << endl;
+//         }
+//         else
+//         {
+//             top2--;
+//             arr[top2] = data;
+//         }
+//     }
 
-    void pop1(int data)
-    {
-        if (top1 == -1)
-        {
-            // stack empty
-            cout << "Underflow in stack 1" << endl;
-        }
-        else
-        {
-            // stack not empty
-            top1--;
-        }
-    }
+//     void pop1(int data)
+//     {
+//         if (top1 == -1)
+//         {
+//             // stack empty
+//             cout << "Underflow in stack 1" << endl;
+//         }
+//         else
+//         {
+//             // stack not empty
+//             top1--;
+//         }
+//     }
 
-    void pop2(int data)
-    {
-        if (top2 == size)
-        {
-            // stack 2 is empty
-            cout << "Underflow in stack 2" << endl;
-        }
-        else
-        {
-            // stack 2 is not empty
-            top2++;
-        }
-    }
+//     void pop2(int data)
+//     {
+//         if (top2 == size)
+//         {
+//             // stack 2 is empty
+//             cout << "Underflow in stack 2" << endl;
+//         }
+//         else
+//         {
+//             // stack 2 is not empty
+//             top2++;
+//         }
+//     }
 
-    void print()
-    {
+//     void print()
+//     {
 
-        cout << endl;
-        cout << "top1: " << top1 << endl;
-        cout << "top2: " << top2 << endl;
-        for (int i = 0; i < size; i++)
-        {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-    }
-};
+//         cout << endl;
+//         cout << "top1: " << top1 << endl;
+//         cout << "top2: " << top2 << endl;
+//         for (int i = 0; i < size; i++)
+//         {
+//             cout << arr[i] << " ";
+//         }
+//         cout << endl;
+//     }
+// };
 
-int main()
-{
-    Stack s(10);
+// int main()
+// {
+//     Stack s(10);
 
-    s.push1(10);
-    s.print();
-    s.push1(20);
-    s.print();
-    s.push1(30);
-    s.print();
-    s.push1(40);
-    s.print();
-    s.push1(50);
-    s.print();
+//     s.push1(10);
+//     s.print();
+//     s.push1(20);
+//     s.print();
+//     s.push1(30);
+//     s.print();
+//     s.push1(40);
+//     s.print();
+//     s.push1(50);
+//     s.print();
 
-    s.push2(100);
-    s.print();
-    s.push2(110);
-    s.print();
-    s.push2(120);
-    s.print();
+//     s.push2(100);
+//     s.print();
+//     s.push2(110);
+//     s.print();
+//     s.push2(120);
+//     s.print();
 
-    // Note: it is giving garbage value
-    return 0;
-}
+//     // Note: it is giving garbage value
+//     return 0;
+// }
+
+// ------------ Day 2 ---------------------//
+
+// Insert at bottom
+
+// #include <iostream>
+// #include <stack>
+// using namespace std;
+
+// void solve(stack<int> &s, int target)
+// {
+//     // base case
+//     if (s.empty())
+//     {
+//         s.push(target);
+//         return;
+//     }
+//     int topElement = s.top();
+//     s.pop();
+//     // rec cal
+//     solve(s, target);
+
+//     // BT
+//     s.push(topElement);
+// }
+
+// void insertAtBottom(stack<int> &s)
+// {
+//     if (s.empty())
+//     {
+//         cout << "Stack is empty, cant insert at bottom" << endl;
+//         return;
+//     }
+
+//     int target = s.top();
+//     s.pop();
+//     solve(s, target);
+// }
+
+// int main()
+// {
+//     stack<int> s;
+//     s.push(10);
+//     s.push(20);
+//     s.push(30);
+//     s.push(40);
+//     s.push(50);
+
+//     insertAtBottom(s);
+
+//     cout << "Printing" << endl;
+//     while (!s.empty())
+//     {
+//         cout << s.top() << " ";
+//         s.pop();
+//     }
+//     cout << endl;
+
+//     return 0;
+// }
+
+// Reverse a stack
+// we'll use recursion method for this
+// Hint : Insert at bottom and recursion
+
+// #include <iostream>
+// #include <stack>
+// using namespace std;
+
+// void insertAtBottom(stack<int> &s)
+// {
+//     // base case
+//     if (s.empty())
+//     {
+//         s.push(target);
+//         return;
+//     }
+//     int topElement = s.top();
+//     s.pop();
+//     // rec cal
+//     insertAtBottom(s, target);
+//     // BT
+//     s.push(topElement);
+// }
+
+// void reverseStack(stack<int> &s)
+// {
+//     // base case
+//     if (s.empty())
+//     {
+//         return;
+//     }
+
+//     int target = s.top();
+//     s.pop();
+
+//     // reverse stack
+//     reverseStack(s);
+//     // insert at bottom target ko
+//     insertAtBottom(s, target);
+// }
+
+// int main()
+// {
+//     stack<int> s;
+//     s.push(10);
+//     s.push(20);
+//     s.push(30);
+//     s.push(40);
+//     s.push(50);
+
+//     reverseStack(s);
+
+//     cout << "Printing" << endl;
+//     while (!s.empty())
+//     {
+//         cout << s.top() << " ";
+//         s.pop();
+//     }
+//     cout << endl;
+//     return 0;
+// }
