@@ -314,61 +314,190 @@
 // we'll use recursion method for this
 // Hint : Insert at bottom and recursion
 
+// #include <iostream>
+// #include <stack>
+// using namespace std;
+
+// void insertAtBottom(stack<int> &s, int target)
+// {
+//     // base case
+//     if (s.empty())
+//     {
+//         s.push(target);
+//         return;
+//     }
+//     int topElement = s.top();
+//     s.pop();
+//     // recursively insert the target at the bottom
+//     insertAtBottom(s, target);
+//     // Bring the topElement back to the top
+//     s.push(topElement);
+// }
+
+// void reverseStack(stack<int> &s)
+// {
+//     // base case
+//     if (s.empty())
+//     {
+//         return;
+//     }
+
+//     int target = s.top();
+//     s.pop();
+
+//     // reverse the rest of the stack
+//     reverseStack(s);
+
+//     // Insert the target at the bottom of the reversed stack
+//     insertAtBottom(s, target);
+// }
+
+// int main()
+// {
+//     stack<int> s;
+//     s.push(10);
+//     s.push(20);
+//     s.push(30);
+//     s.push(40);
+//     s.push(50);
+
+//     reverseStack(s);
+
+//     cout << "Printing" << endl;
+//     while (!s.empty())
+//     {
+//         cout << s.top() << " ";
+//         s.pop();
+//     }
+//     cout << endl;
+//     return 0;
+// }
+
+/* ----------- Day 3 ----------------- */
+
+// Remove all adjacent string in stacks
+
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// void removeAdjacentStrings(stack<string> &s)
+// {
+//     stack<string> tempStack;
+//     while (!s.empty())
+//     {
+//         if (tempStack.empty() || s.top() != tempStack.top())
+//         {
+//             tempStack.push(s.top());
+//         }
+//         s.pop();
+//     }
+
+//     // Now, the tempStack contains the strings with adjacent duplicates removed.
+//     // You can copy the contents back to the original stack if needed.
+//     while (!tempStack.empty())
+//     {
+//         s.push(tempStack.top());
+//         tempStack.pop();
+//     }
+// }
+
+// int main()
+// {
+//     stack<string> stackOfStrings;
+//     stackOfStrings.push("hello");
+//     stackOfStrings.push("hello");
+//     stackOfStrings.push("Arshad");
+//     stackOfStrings.push("Arshad");
+//     stackOfStrings.push("Noor");
+//     stackOfStrings.push("Noor");
+//     stackOfStrings.push("Noor");
+
+//     removeAdjacentStrings(stackOfStrings);
+
+//     cout << "Stack after removing adjacent duplicates:\n";
+//     while (!stackOfStrings.empty())
+//     {
+//         cout << stackOfStrings.top() << endl;
+//         stackOfStrings.pop();
+//     }
+
+//     return 0;
+// }
+
+// Minimum Bracket Reversal Program
+
 #include <iostream>
 #include <stack>
+#include <string>
 using namespace std;
 
-void insertAtBottom(stack<int> &s, int target)
+int minimumBracketReversals(const string &expression)
 {
-    // base case
-    if (s.empty())
-    {
-        s.push(target);
-        return;
-    }
-    int topElement = s.top();
-    s.pop();
-    // recursively insert the target at the bottom
-    insertAtBottom(s, target);
-    // Bring the topElement back to the top
-    s.push(topElement);
-}
+    int len = expression.length();
 
-void reverseStack(stack<int> &s)
-{
-    // base case
-    if (s.empty())
+    // If the length of the expression is odd, it's not possible to balance.
+    if (len % 2 != 0)
     {
-        return;
+        return -1;
     }
 
-    int target = s.top();
-    s.pop();
+    stack<char> s;
+    for (char c : expression)
+    {
+        if (c == '{')
+        {
+            s.push(c);
+        }
+        else if (c == '}' && !s.empty() && s.top() == '{')
+        {
+            s.pop();
+        }
+        else
+        {
+            s.push(c);
+        }
+    }
 
-    // reverse the rest of the stack
-    reverseStack(s);
+    int open_brackets = 0;   // Count of open brackets remaining in the stack.
+    int closed_brackets = 0; // Count of closed brackets remaining in the stack.
 
-    // Insert the target at the bottom of the reversed stack
-    insertAtBottom(s, target);
+    while (!s.empty())
+    {
+        if (s.top() == '{')
+        {
+            open_brackets++;
+        }
+        else
+        {
+            closed_brackets++;
+        }
+        s.pop();
+    }
+
+    // Calculate the minimum reversals required to balance the expression.
+    int min_reversals = (open_brackets + 1) / 2 + (closed_brackets + 1) / 2;
+
+    return min_reversals;
 }
 
 int main()
 {
-    stack<int> s;
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    s.push(40);
-    s.push(50);
+    string expression;
+    cout << "Enter the expression: ";
+    cin >> expression;
 
-    reverseStack(s);
+    int minReversals = minimumBracketReversals(expression);
 
-    cout << "Printing" << endl;
-    while (!s.empty())
+    if (minReversals == -1)
     {
-        cout << s.top() << " ";
-        s.pop();
+        cout << "The expression cannot be balanced." << endl;
     }
-    cout << endl;
+    else
+    {
+        cout << "Minimum bracket reversals required: " << minReversals << endl;
+    }
+
     return 0;
 }
