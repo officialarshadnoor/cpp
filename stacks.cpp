@@ -428,75 +428,225 @@
 
 // Minimum Bracket Reversal Program
 
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// int minimumBracketReversals(const string &expression)
+// {
+//     int len = expression.length();
+
+//     // If the length of the expression is odd, it's not possible to balance.
+//     if (len % 2 != 0)
+//     {
+//         return -1;
+//     }
+
+//     stack<char> s;
+//     for (char c : expression)
+//     {
+//         if (c == '{')
+//         {
+//             s.push(c);
+//         }
+//         else if (c == '}' && !s.empty() && s.top() == '{')
+//         {
+//             s.pop();
+//         }
+//         else
+//         {
+//             s.push(c);
+//         }
+//     }
+
+//     int open_brackets = 0;   // Count of open brackets remaining in the stack.
+//     int closed_brackets = 0; // Count of closed brackets remaining in the stack.
+
+//     while (!s.empty())
+//     {
+//         if (s.top() == '{')
+//         {
+//             open_brackets++;
+//         }
+//         else
+//         {
+//             closed_brackets++;
+//         }
+//         s.pop();
+//     }
+
+//     // Calculate the minimum reversals required to balance the expression.
+//     int min_reversals = (open_brackets + 1) / 2 + (closed_brackets + 1) / 2;
+
+//     return min_reversals;
+// }
+
+// int main()
+// {
+//     string expression;
+//     cout << "Enter the expression: ";
+//     cin >> expression;
+
+//     int minReversals = minimumBracketReversals(expression);
+
+//     if (minReversals == -1)
+//     {
+//         cout << "The expression cannot be balanced." << endl;
+//     }
+//     else
+//     {
+//         cout << "Minimum bracket reversals required: " << minReversals << endl;
+//     }
+
+//     return 0;
+// }
+
+// Day 4 -  Stacks
+
+/* Problem : Next greater node finding in stacks */
+
+// #include <iostream>
+// #include <vector>
+// #include <stack>
+
+// using namespace std;
+
+// struct ListNode
+// {
+//     int val;
+//     ListNode *next;
+//     ListNode(int x) : val(x), next(NULL) {}
+// };
+
+// class Solution
+// {
+// public:
+//     vector<int> nextLargerNodes(ListNode *head)
+//     {
+//         vector<int> ll;
+//         while (head)
+//         {
+//             ll.push_back(head->val);
+//             head = head->next;
+//         }
+
+//         stack<int> st;
+//         vector<int> ans(ll.size(), 0);
+
+//         for (int i = 0; i < ll.size(); ++i)
+//         {
+//             while (!st.empty() && ll[st.top()] < ll[i])
+//             {
+//                 // ith element is the next greater of the element present in stack
+//                 int idx = st.top();
+//                 st.pop();
+//                 ans[idx] = ll[i];
+//             }
+//             st.push(i);
+//         }
+//         return ans;
+//     }
+// };
+
+// int main()
+// {
+//     ListNode *head = new ListNode(2);
+//     head->next = new ListNode(7);
+//     head->next->next = new ListNode(4);
+//     head->next->next->next = new ListNode(3);
+//     head->next->next->next->next = new ListNode(5);
+
+//     Solution solution;
+//     vector<int> result = solution.nextLargerNodes(head);
+
+//     for (int val : result)
+//     {
+//         cout << val << " ";
+//     }
+
+//     // Free memory for linked list
+//     while (head)
+//     {
+//         ListNode *temp = head;
+//         head = head->next;
+//         delete temp;
+//     }
+
+//     return 0;
+// }
+
+// Celebrity problem solving in DSA
+// -> A celebrity is a person who is known to all but does not know anyone at a party. If you go to a party of N people, find if there is a celebrity in the party or not
+
 #include <iostream>
 #include <stack>
-#include <string>
 using namespace std;
 
-int minimumBracketReversals(const string &expression)
+// Function to check if person A knows person B.
+bool knows(int A, int B)
 {
-    int len = expression.length();
+    return false;
+}
 
-    // If the length of the expression is odd, it's not possible to balance.
-    if (len % 2 != 0)
+int findCelebrity(int n)
+{
+    stack<int> people;
+
+    // Push all people onto the stack.
+    for (int i = 0; i < n; i++)
     {
-        return -1;
+        people.push(i);
     }
 
-    stack<char> s;
-    for (char c : expression)
+    // Eliminate candidates until only one potential celebrity remains.
+    while (people.size() > 1)
     {
-        if (c == '{')
+        int A = people.top();
+        people.pop();
+        int B = people.top();
+        people.pop();
+
+        if (knows(A, B))
         {
-            s.push(c);
-        }
-        else if (c == '}' && !s.empty() && s.top() == '{')
-        {
-            s.pop();
+            // A knows B, so A cannot be the celebrity. B might be the celebrity.
+            people.push(B);
         }
         else
         {
-            s.push(c);
+            // A doesn't know B, so B cannot be the celebrity. A might be the celebrity.
+            people.push(A);
         }
     }
 
-    int open_brackets = 0;   // Count of open brackets remaining in the stack.
-    int closed_brackets = 0; // Count of closed brackets remaining in the stack.
+    int potentialCelebrity = people.top();
 
-    while (!s.empty())
+    // Check if the potential celebrity is indeed a celebrity.
+    for (int i = 0; i < n; i++)
     {
-        if (s.top() == '{')
+        if (i != potentialCelebrity && (!knows(i, potentialCelebrity) || knows(potentialCelebrity, i)))
         {
-            open_brackets++;
+            return -1; // No celebrity found.
         }
-        else
-        {
-            closed_brackets++;
-        }
-        s.pop();
     }
 
-    // Calculate the minimum reversals required to balance the expression.
-    int min_reversals = (open_brackets + 1) / 2 + (closed_brackets + 1) / 2;
-
-    return min_reversals;
+    return potentialCelebrity; // Return the potential celebrity.
 }
 
 int main()
 {
-    string expression;
-    cout << "Enter the expression: ";
-    cin >> expression;
+    int n;
+    cout << "Enter the number of people at the party: ";
+    cin >> n;
 
-    int minReversals = minimumBracketReversals(expression);
-
-    if (minReversals == -1)
+    int celebrity = findCelebrity(n);
+    if (celebrity != -1)
     {
-        cout << "The expression cannot be balanced." << endl;
+        cout << "The celebrity is person " << celebrity << endl;
     }
     else
     {
-        cout << "Minimum bracket reversals required: " << minReversals << endl;
+        cout << "No celebrity found at the party." << endl;
     }
 
     return 0;
