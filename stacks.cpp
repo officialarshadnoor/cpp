@@ -502,7 +502,7 @@
 //     return 0;
 // }
 
-// Day 4 -  Stacks
+// Day 4 -  Stacks -------------------------------- /
 
 /* Problem : Next greater node finding in stacks */
 
@@ -579,75 +579,298 @@
 // Celebrity problem solving in DSA
 // -> A celebrity is a person who is known to all but does not know anyone at a party. If you go to a party of N people, find if there is a celebrity in the party or not
 
+// #include <iostream>
+// #include <stack>
+// using namespace std;
+
+// // Function to check if person A knows person B.
+// bool knows(int A, int B)
+// {
+//     return false;
+// }
+
+// int findCelebrity(int n)
+// {
+//     stack<int> people;
+
+//     // Push all people onto the stack.
+//     for (int i = 0; i < n; i++)
+//     {
+//         people.push(i);
+//     }
+
+//     // Eliminate candidates until only one potential celebrity remains.
+//     while (people.size() > 1)
+//     {
+//         int A = people.top();
+//         people.pop();
+//         int B = people.top();
+//         people.pop();
+
+//         if (knows(A, B))
+//         {
+//             // A knows B, so A cannot be the celebrity. B might be the celebrity.
+//             people.push(B);
+//         }
+//         else
+//         {
+//             // A doesn't know B, so B cannot be the celebrity. A might be the celebrity.
+//             people.push(A);
+//         }
+//     }
+
+//     int potentialCelebrity = people.top();
+
+//     // Check if the potential celebrity is indeed a celebrity.
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (i != potentialCelebrity && (!knows(i, potentialCelebrity) || knows(potentialCelebrity, i)))
+//         {
+//             return -1; // No celebrity found.
+//         }
+//     }
+
+//     return potentialCelebrity; // Return the potential celebrity.
+// }
+
+// int main()
+// {
+//     int n;
+//     cout << "Enter the number of people at the party: ";
+//     cin >> n;
+
+//     int celebrity = findCelebrity(n);
+//     if (celebrity != -1)
+//     {
+//         cout << "The celebrity is person " << celebrity << endl;
+//     }
+//     else
+//     {
+//         cout << "No celebrity found at the party." << endl;
+//     }
+
+//     return 0;
+// }
+
+// Stack Day 5 -  Advanced Level Problems
+
+/* Problem: Evaluate Postfix Expression */
+
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// #include <cmath>
+// using namespace std;
+
+// int evaluatePostfixExpression(const string &expression)
+// {
+//     stack<int> stack;
+
+//     for (char c : expression)
+//     {
+//         if (isdigit(c))
+//         {
+//             stack.push(c - '0');
+//         }
+//         else
+//         {
+//             int operand2 = stack.top();
+//             stack.pop();
+//             int operand1 = stack.top();
+//             stack.pop();
+
+//             switch (c)
+//             {
+//             case '+':
+//                 stack.push(operand1 + operand2);
+//                 break;
+//             case '-':
+//                 stack.push(operand1 - operand2);
+//                 break;
+//             case '*':
+//                 stack.push(operand1 * operand2);
+//                 break;
+//             case '/':
+//                 stack.push(operand1 / operand2);
+//                 break;
+//             case '^':
+//                 stack.push(pow(operand1, operand2));
+//                 break;
+//             }
+//         }
+//     }
+
+//     return stack.top();
+// }
+
+// int main()
+// {
+//     string postfix = "23*5+";
+//     int result = evaluatePostfixExpression(postfix);
+//     cout << "Result: " << result << endl;
+//     return 0;
+// }
+
+// Problem :  Check for balanced parantheses
+
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// bool areParenthesesBalanced(const string &expression)
+// {
+//     stack<char> stack;
+
+//     for (char c : expression)
+//     {
+//         if (c == '(' || c == '[' || c == '{')
+//         {
+//             stack.push(c);
+//         }
+//         else if (c == ')' || c == ']' || c == '}')
+//         {
+//             if (stack.empty())
+//             {
+//                 return false;
+//             }
+//             char top = stack.top();
+//             stack.pop();
+//             if ((c == ')' && top != '(') || (c == ']' && top != '[') || (c == '}' && top != '{'))
+//             {
+//                 return false;
+//             }
+//         }
+//     }
+
+//     return stack.empty();
+// }
+
+// int main()
+// {
+//     string expression = "{[()]}";
+//     if (areParenthesesBalanced(expression))
+//     {
+//         cout << "Balanced" << endl;
+//     }
+//     else
+//     {
+//         cout << "Not Balanced" << endl;
+//     }
+//     return 0;
+// }
+
+// Problem : Implementing a min Stack
 #include <iostream>
 #include <stack>
 using namespace std;
 
-// Function to check if person A knows person B.
-bool knows(int A, int B)
+class MinStack
 {
-    return false;
-}
-
-int findCelebrity(int n)
-{
-    stack<int> people;
-
-    // Push all people onto the stack.
-    for (int i = 0; i < n; i++)
+public:
+    MinStack()
     {
-        people.push(i);
+        // Constructor
     }
 
-    // Eliminate candidates until only one potential celebrity remains.
-    while (people.size() > 1)
+    void push(int x)
     {
-        int A = people.top();
-        people.pop();
-        int B = people.top();
-        people.pop();
-
-        if (knows(A, B))
+        data_stack.push(x);
+        if (min_stack.empty() || x <= min_stack.top())
         {
-            // A knows B, so A cannot be the celebrity. B might be the celebrity.
-            people.push(B);
-        }
-        else
-        {
-            // A doesn't know B, so B cannot be the celebrity. A might be the celebrity.
-            people.push(A);
+            min_stack.push(x);
         }
     }
 
-    int potentialCelebrity = people.top();
-
-    // Check if the potential celebrity is indeed a celebrity.
-    for (int i = 0; i < n; i++)
+    void pop()
     {
-        if (i != potentialCelebrity && (!knows(i, potentialCelebrity) || knows(potentialCelebrity, i)))
+        if (data_stack.top() == min_stack.top())
         {
-            return -1; // No celebrity found.
+            min_stack.pop();
         }
+        data_stack.pop();
     }
 
-    return potentialCelebrity; // Return the potential celebrity.
-}
+    int top()
+    {
+        return data_stack.top();
+    }
+
+    int getMin()
+    {
+        return min_stack.top();
+    }
+
+private:
+    stack<int> data_stack;
+    stack<int> min_stack;
+};
 
 int main()
 {
-    int n;
-    cout << "Enter the number of people at the party: ";
-    cin >> n;
+    MinStack minStack;
+    minStack.push(3);
+    minStack.push(1);
+    minStack.push(5);
+    minStack.push(2);
 
-    int celebrity = findCelebrity(n);
-    if (celebrity != -1)
+    cout << "Min Element: " << minStack.getMin() << endl; // Output: 1
+    minStack.pop();
+    cout << "Top Element: " << minStack.top() << endl; // Output: 5
+    return 0;
+}
+
+// Problem: Implement a Queue using Stacks
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class MyQueue
+{
+public:
+    void push(int x)
     {
-        cout << "The celebrity is person " << celebrity << endl;
-    }
-    else
-    {
-        cout << "No celebrity found at the party." << endl;
+        while (!s1.empty())
+        {
+            s2.push(s1.top());
+            s1.pop();
+        }
+        s1.push(x);
+        while (!s2.empty())
+        {
+            s1.push(s2.top());
+            s2.pop();
+        }
     }
 
+    int pop()
+    {
+        int front = s1.top();
+        s1.pop();
+        return front;
+    }
+
+    int peek()
+    {
+        return s1.top();
+    }
+
+    bool empty()
+    {
+        return s1.empty();
+    }
+
+private:
+    stack<int> s1, s2;
+};
+
+int main()
+{
+    MyQueue q;
+    q.push(1);
+    q.push(2);
+    cout << q.peek() << endl;  // Output: 1
+    cout << q.pop() << endl;   // Output: 1
+    cout << q.empty() << endl; // Output: 0 (false)
     return 0;
 }
