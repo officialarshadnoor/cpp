@@ -41,102 +41,269 @@
 //     return 0;
 // }
 
+// #include <iostream>
+// #include <queue>
+// using namespace std;
+
+// class Queue
+// {
+// public:
+//     int *arr;
+//     int size;
+//     int front;
+//     int rear;
+
+//     Queue(int size)
+//     {
+//         this->size = size;
+//         arr = new int[size];
+//         front = 0;
+//         rear = 0;
+//     }
+
+//     void push(int data)
+//     {
+//         if (rear == size)
+//         {
+//             cout << "Q is full" << endl;
+//         }
+//         else
+//         {
+//             arr[rear] = data;
+//             rear++;
+//         }
+//     }
+
+//     void pop()
+//     {
+//         if (front == rear)
+//         {
+//             cout << "Queue is empty";
+//         }
+//         else
+//         {
+//             arr[front] = -1;
+//             front++;
+//             if (front == rear)
+//             {
+//                 front = 0;
+//                 rear = 0;
+//             }
+//         }
+//     }
+
+//     int getFront()
+//     {
+//         if (front == rear)
+//         {
+//             cout << "Q is empty" << endl;
+//             return -1;
+//         }
+//         else
+//         {
+//             return arr[front];
+//         }
+//     }
+
+//     bool isEmpty()
+//     {
+//         if (front == rear)
+//         {
+//             return true;
+//         }
+//         else
+//         {
+//             return false;
+//         }
+//     }
+
+//     int getSize()
+//     {
+//         return rear - front;
+//     }
+// };
+
+// int main()
+// {
+//     Queue q(10);
+
+//     q.push(5);
+//     q.push(15);
+//     q.push(25);
+//     q.push(55);
+
+//     cout << "Size of queue is: " << q.getSize() << endl;
+
+//     cout << "Front element is " << q.getFront() << endl;
+//     q.pop(); // remove
+//     cout << q.getSize();
+
+//     return 0;
+// }
+
+/* -------------------- Queue --------------------------
+------------------------Day 2 ---------------------- */
+
+// Circular Queue
+
 #include <iostream>
-#include <queue>
 using namespace std;
 
-class Queue
+class CirQueue
 {
 public:
-    int *arr;
     int size;
+    int *arr;
     int front;
     int rear;
 
-    Queue(int size)
+    CirQueue(int size)
     {
         this->size = size;
         arr = new int[size];
-        front = 0;
-        rear = 0;
+        front = -1;
+        rear = -1;
     }
 
     void push(int data)
     {
-        if (rear == size)
+        // Queue full
+
+        // single element case -> first element
+
+        // circular nature
+
+        // writing normal flow
+
+        // TODO: add one more condition in the QUeue FULL condition
+        if (front == 0 && rear == size - 1)
         {
-            cout << "Q is full" << endl;
+            cout << "Q is full, cannot insert" << endl;
         }
+        else if (front == -1)
+        {
+            front = rear = 0;
+            arr[rear] = data;
+        }
+        else if (rear == size - 1 && front != 0)
+        {
+            rear = 0;
+            arr[rear] = data;
+        }
+
         else
         {
-            arr[rear] = data;
             rear++;
+            arr[rear] = data;
         }
     }
 
+    // writing pop flow
     void pop()
     {
-        if (front == rear)
+        // empty check
+        // single element check
+        // circular nature
+        // normal flow
+        if (front == -1)
         {
-            cout << "Queue is empty";
+            cout << "Q is empty, cannot pop" << endl;
         }
-        else
+        else if (front == rear)
         {
             arr[front] = -1;
-            front++;
-            if (front == rear)
-            {
-                front = 0;
-                rear = 0;
-            }
+            front = -1;
+            rear = -1;
         }
-    }
-
-    int getFront()
-    {
-        if (front == rear)
+        else if (front == size - 1)
         {
-            cout << "Q is empty" << endl;
-            return -1;
+            front = 0;
         }
         else
         {
-            return arr[front];
+            front++;
         }
     }
 
+    // for checking Queue is empty
     bool isEmpty()
     {
-        if (front == rear)
+        return front == -1;
+    }
+
+    // displaying circular queue
+    void display()
+    {
+        if (isEmpty())
         {
-            return true;
+            cout << "Queue is empty" << endl;
+            return;
+        }
+        int i = front;
+        while (true)
+        {
+            cout << CirQueue[i] << " ";
+            if (i == rear)
+                break;
+            i = (i + 1) % MAX_SIZE;
+        }
+        cout << endl;
+    }
+
+    // circular queue size
+    int size()
+    {
+        if (isEmpty())
+        {
+            return 0;
+        }
+
+        if
+        {
+            return rear - front + 1;
         }
         else
         {
-            return false;
+            return MAX_SIZE - front + rear + 1;
         }
     }
 
-    int getSize()
+    // Front and rear Element access
+    int getFront()
     {
-        return rear - front;
+        if (isEmpty())
+        {
+            return -1;
+        }
+        return circularQueue[front];
+    }
+
+    int getRear()
+    {
+        if (isEmpty())
+        {
+            return -1;
+        }
+        return CirQueue[rear];
+    }
+
+    // reusing space after dequeue
+    int dequeue()
+    {
+        if (front == -1)
+        {
+            // Circular queue is empty.
+            return -1;
+        }
+        int item = circularQueue[front];
+        if (front == rear)
+        {
+            front = rear = -1;
+        }
+        else
+        {
+            front = (front + 1) % MAX_SIZE;
+        }
+        return item;
     }
 };
-
-int main()
-{
-    Queue q(10);
-
-    q.push(5);
-    q.push(15);
-    q.push(25);
-    q.push(55);
-
-    cout << "Size of queue is: " << q.getSize() << endl;
-
-    cout << "Front element is " << q.getFront() << endl;
-    q.pop(); // remove
-    cout << q.getSize();
-
-    return 0;
-}
