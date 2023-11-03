@@ -312,50 +312,115 @@
 
 // Program for reversing a queue
 
-#include <iostream>
-#include <queue>
-#include <stack>
-using namespace std;
+// #include <iostream>
+// #include <queue>
+// #include <stack>
+// using namespace std;
 
-void reverseQueue(queue<int> &q)
-{
-    stack<int> s;
+// void reverseQueue(queue<int> &q)
+// {
+//     stack<int> s;
 
-    // step 1: put all elements of q into s
-    while (!q.empty())
-    {
-        int element = q.front();
-        q.pop();
-        s.push(element);
-    }
+//     // step 1: put all elements of q into s
+//     while (!q.empty())
+//     {
+//         int element = q.front();
+//         q.pop();
+//         s.push(element);
+//     }
 
-    // step2: put all element from stack onto q
+//     // step2: put all element from stack onto q
 
-    while (!s.empty())
-    {
-        int element = s.top();
-        s.pop();
+//     while (!s.empty())
+//     {
+//         int element = s.top();
+//         s.pop();
 
-        q.push(element);
-    }
-}
+//         q.push(element);
+//     }
+// }
 
-int main()
-{
-    queue<int> q;
-    q.push(3);
-    q.push(6);
-    q.push(9);
-    q.push(2);
-    q.push(8);
+// int main()
+// {
+//     queue<int> q;
+//     q.push(3);
+//     q.push(6);
+//     q.push(9);
+//     q.push(2);
+//     q.push(8);
 
-    reverseQueue(q);
+//     reverseQueue(q);
 
-    cout << "printing queue" << endl;
-    while (!q.empty())
-    {
-        cout << q.front() << " ";
-        q.pop();
-    }
-    cout << endl;
-}
+//     cout << "printing queue" << endl;
+//     while (!q.empty())
+//     {
+//         cout << q.front() << " ";
+//         q.pop();
+//     }
+//     cout << endl;
+// }
+
+// Day 4: Queue
+
+// #include <iostream>
+// #include <deque>
+// using namespace std;
+
+// void solve(int arr[], int n, int k)
+// {
+//     deque<int> q;
+
+//     // process first window of size k
+//     for (int i = 0; i < k; i++)
+//     {
+//         if (arr[i] < 0)
+//         {
+//             q.push_back(i);
+//         }
+//     }
+
+//     // remaining window ko process karo
+//     for (int i = k; i < n; i++)
+//     {
+//         // answer of old window
+//         if (q.empty())
+//         {
+//             cout << 0 << " ";
+//         }
+//         else
+//         {
+//             cout << arr[q.front()] << " ";
+//         }
+
+//         // out of window elements ko remove kardo
+//         while ((!q.empty()) && (i - q.front() >= k))
+//         {
+//             q.pop_front();
+//         }
+
+//         if (arr[i] < 0)
+//             q.push_back(i);
+//     }
+
+//     // print ans of last window
+//     if (q.empty())
+//     {
+//         cout << 0 << " ";
+//     }
+//     else
+//     {
+//         cout << arr[q.front()] << " ";
+//     }
+// }
+
+// int main()
+// {
+//     int arr[] = {12, -1, -7, 8, -15, 30, 16, 28};
+
+//     int size = 8;
+//     int k = 3;
+
+//     solve(arr, size, k);
+
+//     return 0;
+// }
