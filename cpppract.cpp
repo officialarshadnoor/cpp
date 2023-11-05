@@ -240,46 +240,117 @@
 
 // Run time polymorphism
 
+// #include <iostream>
+// using namespace std;
+
+// class Shape
+// {
+// public:
+//     virtual void draw()
+//     {
+//         cout << "Drawing a shape" << endl;
+//     }
+// };
+
+// class Circle : public Shape
+// {
+// public:
+//     void draw() override
+//     {
+//         cout << "Drawing a circle " << endl;
+//     }
+// };
+
+// class Rectangle : public Shape
+// {
+// public:
+//     void draw() override
+//     {
+//         cout << "Drawing a rectangle" << endl;
+//     }
+// };
+
+// int main()
+// {
+//     Shape *shape1 = new Circle();
+//     Shape *shape2 = new Rectangle();
+
+//     shape1->draw();
+//     shape2->draw();
+
+//     delete shape1;
+//     delete shape2;
+
+//     return 0;
+// }
+
 #include <iostream>
+#include <queue>
 using namespace std;
 
-class Shape
+class node
 {
 public:
-    virtual void draw()
+    int data;
+    node *left;
+    node *right;
+
+    node(int d)
     {
-        cout << "Drawing a shape" << endl;
+        this->data = d;
+        this->left = NULL;
+        this->right = NULL;
     }
 };
 
-class Circle : public Shape
+node *buildTree(node *root)
 {
-public:
-    void draw() override
-    {
-        cout << "Drawing a circle " << endl;
-    }
-};
+    cout << "Enter the data: " << endl;
+    int data;
+    cin >> data;
+    root = new node(data);
 
-class Rectangle : public Shape
-{
-public:
-    void draw() override
+    if (data == -1)
     {
-        cout << "Drawing a rectangle" << endl;
+        return NULL;
     }
-};
+    cout << "Enter data for inserting in left" << endl;
+    root->left = buildTree(root->left);
+    cout << "Enter data for inserting in right" << endl;
+    root->right = buildTree(root->right);
+
+    return root;
+}
+
+void levelOrderTraversal(node *root)
+{
+    queue<node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        node *temp = q.front();
+        cout << temp->data << " ";
+        q.pop();
+
+        if (temp->left)
+        {
+            q.push(temp->left);
+        }
+        if (temp->right)
+        {
+            q.push(temp->right);
+        }
+    }
+}
 
 int main()
 {
-    Shape *shape1 = new Circle();
-    Shape *shape2 = new Rectangle();
+    node *root = NULL;
+    // creating a tree
+    root = buildTree(root);
 
-    shape1->draw();
-    shape2->draw();
-
-    delete shape1;
-    delete shape2;
-
+    // level order
+    levelOrderTraversal(root);
     return 0;
 }
