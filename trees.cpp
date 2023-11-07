@@ -22,6 +22,7 @@
 */
 
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class Node
@@ -57,6 +58,32 @@ Node *buildTree()
     root->right = buildTree();
 
     return root;
+}
+
+void levelOrderTraversal(Node *root)
+{
+    queue<Node *> q;
+    // initially
+    q.push(root);
+
+    while (!q.empty())
+    {
+        // A
+        Node *temp = q.front();
+        // B
+        q.pop();
+        // C
+        cout << temp->data << " ";
+        // D
+        if (temp->left)
+        {
+            q.push(temp->left);
+        }
+        if (temp->right)
+        {
+            q.push(temp->right);
+        }
+    }
 }
 
 int main()
