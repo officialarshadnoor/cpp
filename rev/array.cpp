@@ -121,8 +121,112 @@ int main()
     cout << "Min value is " << mn << endl;
 }
 
-// Find the second largest element
-#include <limits.h>
+#include <iostream>
+
 int main()
 {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int sum = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        sum += arr[i];
+    }
+
+    double average = static_cast<double>(sum) / n;
+
+    std::cout << "Sum: " << sum << std::endl;
+    std::cout << "Average: " << average << std::endl;
+
+    return 0;
+}
+
+// find minimum and max
+#include <iostream>
+
+int main()
+{
+    int arr[] = {5, 3, 7, 1, 9, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int max = arr[0];
+    int min = arr[0];
+
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+        if (arr[i] < min)
+        {
+            min = arr[i];
+        }
+    }
+
+    std::cout << "Maximum: " << max << std::endl;
+    std::cout << "Minimum: " << min << std::endl;
+
+    return 0;
+}
+
+// Array reversal
+
+#include <iostream>
+
+int main()
+{
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    for (int i = 0, j = n - 1; i < j; i++, j--)
+    {
+        std::swap(arr[i], arr[j]);
+    }
+
+    std::cout << "Reversed Array: ";
+    for (int i = 0; i < n; i++)
+    {
+        std::cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+// Array sorting
+#include <iostream>
+
+void selectionSort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[j] < arr[minIndex])
+            {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i)
+        {
+            std::swap(arr[i], arr[minIndex]);
+        }
+    }
+}
+
+int main()
+{
+    int arr[] = {5, 2, 9, 1, 5, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    selectionSort(arr, n);
+
+    std::cout << "Sorted Array: ";
+    for (int i = 0; i < n; i++)
+    {
+        std::cout << arr[i] << " ";
+    }
+
+    return 0;
 }
