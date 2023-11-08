@@ -105,22 +105,21 @@ using namespace std;
 //     cout << "Max value is " << max << endl;
 // }
 
-for
-    minimum value
+// for
+//     minimum value
 #include <limits.h>
-        int
-        main()
+int main()
+{
+    int arr[] = {12, 3, 54, 67, 2, 46, 69, 87, 56};
+    int size = sizeof(arr) / sizeof(arr[1]);
+    int mn = INT_MAX; // we can also use INT_MAX;
+    for (int i = 0; i < size; i++)
     {
-        int arr[] = {12, 3, 54, 67, 2, 46, 69, 87, 56};
-        int size = sizeof(arr) / sizeof(arr[1]);
-        int mn = INT_MAX; // we can also use INT_MAX;
-        for (int i = 0; i < size; i++)
-        {
-            mn = min(mn, arr[i]);
-        }
-
-        cout << "Min value is " << mn << endl;
+        mn = min(mn, arr[i]);
     }
+
+    cout << "Min value is " << mn << endl;
+}
 
 // Find the second largest element
 #include <limits.h>
