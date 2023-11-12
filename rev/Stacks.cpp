@@ -444,5 +444,5 @@ bool isBalanced(string s)
     if (s.length() % 2 != 0)
         return false;
     stack<char> st;
-    for (int i = 0; i < s.length)
+    for (int i = 0; i < s.length())
 }
