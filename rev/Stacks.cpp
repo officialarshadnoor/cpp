@@ -435,14 +435,54 @@
 //     st.display();
 // }
 
-// is Balanced
-#include <iostream>
-#include <stack>
-using namespace std;
-bool isBalanced(string s)
-{
-    if (s.length() % 2 != 0)
-        return false;
-    stack<char> st;
-    for (int i = 0; i < s.length())
-}
+// // is Balanced
+// #include <iostream>
+// #include <stack>
+// using namespace std;
+// bool isBalanced(string s)
+// {
+//     if (s.length() % 2 != 0)
+//         return false;
+//     stack<char> st;
+//     for (int i = 0; i < s.length())
+// }
+
+// Remove adjacent duplicate elements in string
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// class Solution
+// {
+// public:
+//     string removeDuplicates(string s)
+//     {
+//         stack<char> st;
+//         for (auto ch : s)
+//         {
+//             if (st.empty())
+//             {
+//                 st.push(ch);
+//             }
+//             else if (!st.empty() && st.top() == ch)
+//             {
+//                 // pair up
+//                 st.pop();
+//             }
+//             else
+//             {
+//                 st.push(ch);
+//             }
+//         }
+
+//         string ans;
+//         while (!st.empty())
+//         {
+//             ans += st.top();
+//             st.pop();
+//         }
+//         reverse(ans.begin(), ans.end());
+//         return ans;
+//     }
+// };
